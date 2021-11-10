@@ -124,6 +124,9 @@ public class Jogo
         else if (palavraDeComando.equals("ir")) {
             irParaAmbiente(comando);
         }
+        else if (palavraDeComando.equals("examinar")) {
+            Examinar();
+        }
         else if (palavraDeComando.equals("sair")) {
             querSair = sair(comando);
         }
@@ -189,5 +192,9 @@ public class Jogo
         else {
             return true;  // sinaliza que nos queremos sair
         }
+    }
+
+    private void Examinar(){
+        System.out.println(ambienteAtual.getDescricaoLonga());
     }
 }
