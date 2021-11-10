@@ -78,4 +78,8 @@ public class Ambiente
         return saidaString;
     }
 
+    public String getDescricaoLonga(){
+        return "Voce esta " + descricao + ".\n" +getSaidaString();
+    }
+
 }

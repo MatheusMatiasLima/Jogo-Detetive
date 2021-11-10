@@ -50,37 +50,23 @@ public class Jogo
         fora.ajustarSaida("oeste", cantina);
 
         //anfiteatro.ajustarSaidas(null, null, null, fora);
-        fora.ajustarSaida("oeste", fora);
+        anfiteatro.ajustarSaida("oeste", fora);
 
         //cantina.ajustarSaidas(null, fora, null, null);
-        fora.ajustarSaida("leste", fora);
+        cantina.ajustarSaida("leste", fora);
 
         //laboratorio.ajustarSaidas(fora, escritorio, null, null);
-        fora.ajustarSaida("norte", fora);
-        fora.ajustarSaida("leste", escritorio);
+        laboratorio.ajustarSaida("norte", fora);
+        laboratorio.ajustarSaida("leste", escritorio);
 
         //escritorio.ajustarSaidas(null, null, null, laboratorio);
-        fora.ajustarSaida("oeste", laboratorio);
+        escritorio.ajustarSaida("oeste", laboratorio);
 
         ambienteAtual = fora;  // o jogo comeca do lado de fora
     }
 
     private void imprimirInfoLocalAtual(){
-        System.out.println("Voce esta " + ambienteAtual.getDescricao());
-        System.out.print("Saidas: ");
-        if(ambienteAtual.getSaida("norte") != null) {
-            System.out.print("norte ");
-        }
-        if(ambienteAtual.getSaida("leste") != null) {
-            System.out.print("leste ");
-        }
-        if(ambienteAtual.getSaida("sul") != null) {
-            System.out.print("sul ");
-        }
-        if(ambienteAtual.getSaida("oeste") != null) {
-            System.out.print("oeste ");
-        }
-        System.out.println();
+        System.out.println(ambienteAtual.getDescricaoLonga());
     }
 
     /**
