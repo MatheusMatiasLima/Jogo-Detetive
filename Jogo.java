@@ -44,13 +44,43 @@ public class Jogo
         escritorio = new Ambiente("na sala de administracao dos computadores");
         
         // inicializa as saidas dos ambientes
-        fora.ajustarSaidas(null, anfiteatro, laboratorio, cantina);
-        anfiteatro.ajustarSaidas(null, null, null, fora);
-        cantina.ajustarSaidas(null, fora, null, null);
-        laboratorio.ajustarSaidas(fora, escritorio, null, null);
-        escritorio.ajustarSaidas(null, null, null, laboratorio);
+        //fora.ajustarSaida(null, anfiteatro, laboratorio, cantina);
+        fora.ajustarSaida("leste", anfiteatro);
+        fora.ajustarSaida("sul", laboratorio);
+        fora.ajustarSaida("oeste", cantina);
+
+        //anfiteatro.ajustarSaidas(null, null, null, fora);
+        fora.ajustarSaida("oeste", fora);
+
+        //cantina.ajustarSaidas(null, fora, null, null);
+        fora.ajustarSaida("leste", fora);
+
+        //laboratorio.ajustarSaidas(fora, escritorio, null, null);
+        fora.ajustarSaida("norte", fora);
+        fora.ajustarSaida("leste", escritorio);
+
+        //escritorio.ajustarSaidas(null, null, null, laboratorio);
+        fora.ajustarSaida("oeste", laboratorio);
 
         ambienteAtual = fora;  // o jogo comeca do lado de fora
+    }
+
+    private void imprimirInfoLocalAtual(){
+        System.out.println("Voce esta " + ambienteAtual.getDescricao());
+        System.out.print("Saidas: ");
+        if(ambienteAtual.getSaida("norte") != null) {
+            System.out.print("norte ");
+        }
+        if(ambienteAtual.getSaida("leste") != null) {
+            System.out.print("leste ");
+        }
+        if(ambienteAtual.getSaida("sul") != null) {
+            System.out.print("sul ");
+        }
+        if(ambienteAtual.getSaida("oeste") != null) {
+            System.out.print("oeste ");
+        }
+        System.out.println();
     }
 
     /**
@@ -82,22 +112,7 @@ public class Jogo
         System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
         
-        System.out.println("Voce esta " + ambienteAtual.getDescricao());
-    
-        System.out.print("Saidas: ");
-        if(ambienteAtual.saidaNorte != null) {
-            System.out.print("norte ");
-        }
-        if(ambienteAtual.saidaLeste != null) {
-            System.out.print("leste ");
-        }
-        if(ambienteAtual.saidaSul != null) {
-            System.out.print("sul ");
-        }
-        if(ambienteAtual.saidaOeste != null) {
-            System.out.print("oeste ");
-        }
-        System.out.println();
+        imprimirInfoLocalAtual();
     }
 
     /**
@@ -161,16 +176,16 @@ public class Jogo
         // Tenta sair do ambiente atual
         Ambiente proximoAmbiente = null;
         if(direcao.equals("norte")) {
-            proximoAmbiente = ambienteAtual.saidaNorte;
+            proximoAmbiente = ambienteAtual.getSaida("norte");
         }
         if(direcao.equals("leste")) {
-            proximoAmbiente = ambienteAtual.saidaLeste;
+            proximoAmbiente = ambienteAtual.getSaida("leste");
         }
         if(direcao.equals("sul")) {
-            proximoAmbiente = ambienteAtual.saidaSul;
+            proximoAmbiente = ambienteAtual.getSaida("sul");
         }
         if(direcao.equals("oeste")) {
-            proximoAmbiente = ambienteAtual.saidaOeste;
+            proximoAmbiente = ambienteAtual.getSaida("oeste");
         }
 
         if (proximoAmbiente == null) {
@@ -179,22 +194,7 @@ public class Jogo
         else {
             ambienteAtual = proximoAmbiente;
             
-            System.out.println("Voce esta " + ambienteAtual.getDescricao());
-            
-            System.out.print("Saidas: ");
-            if(ambienteAtual.saidaNorte != null) {
-                System.out.print("norte ");
-            }
-            if(ambienteAtual.saidaLeste != null) {
-                System.out.print("leste ");
-            }
-            if(ambienteAtual.saidaSul != null) {
-                System.out.print("sul ");
-            }
-            if(ambienteAtual.saidaOeste != null) {
-                System.out.print("oeste ");
-            }
-            System.out.println();
+            imprimirInfoLocalAtual();
         }
     }
 

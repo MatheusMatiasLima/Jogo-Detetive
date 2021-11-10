@@ -13,13 +13,13 @@
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
  * @version 2011.07.31 (2016.02.01)
  */
+
+import java.util.HashMap;
+import java.util.Set;
 public class Ambiente 
 {
-    public String descricao;
-    public Ambiente saidaNorte;
-    public Ambiente saidaSul;
-    public Ambiente saidaLeste;
-    public Ambiente saidaOeste;
+    private String descricao;
+    private HashMap<String, Ambiente> saidas;
 
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
@@ -33,6 +33,7 @@ public class Ambiente
     public Ambiente(String descricao) 
     {
         this.descricao = descricao;
+        saidas = new HashMap<String, Ambiente>();
     }
 
     /**
@@ -43,16 +44,17 @@ public class Ambiente
      * @param sul A saida sul.
      * @param oeste A saida oeste.
      */
-    public void ajustarSaidas(Ambiente norte, Ambiente leste, Ambiente sul, Ambiente oeste) 
+    public void ajustarSaida(String direcao, Ambiente vizinho) 
     {
-        if(norte != null)
-            saidaNorte = norte;
-        if(leste != null)
-            saidaLeste = leste;
-        if(sul != null)
-            saidaSul = sul;
-        if(oeste != null)
-            saidaOeste = oeste;
+        // if(norte != null)
+        //     saidas.put("norte", norte);
+        // if(leste != null)
+        //     saidas.put("leste", leste);
+        // if(sul != null)
+        //     saidas.put("sul", sul);
+        // if(oeste != null)
+        //     saidas.put("oeste", oeste);
+        saidas.put(direcao,vizinho);
     }
 
     /**
@@ -61,6 +63,19 @@ public class Ambiente
     public String getDescricao()
     {
         return descricao;
+    }
+
+    public Ambiente getSaida(String direcao){
+        return saidas.get(direcao);
+    }
+
+    public String getSaidaString(){
+        String saidaString = "Saidas: ";
+        Set<String> keys = saidas.keySet();
+        for(String saida : keys){
+            saidaString += " " + saida;
+        }
+        return saidaString;
     }
 
 }
