@@ -54,10 +54,12 @@ public class Jogo
 
         //cantina.ajustarSaidas(null, fora, null, null);
         cantina.ajustarSaida("leste", fora);
+        cantina.ajustarSaida("descer", laboratorio);
 
         //laboratorio.ajustarSaidas(fora, escritorio, null, null);
         laboratorio.ajustarSaida("norte", fora);
         laboratorio.ajustarSaida("leste", escritorio);
+        laboratorio.ajustarSaida("subir", cantina);
 
         //escritorio.ajustarSaidas(null, null, null, laboratorio);
         escritorio.ajustarSaida("oeste", laboratorio);
@@ -161,18 +163,7 @@ public class Jogo
 
         // Tenta sair do ambiente atual
         Ambiente proximoAmbiente = null;
-        if(direcao.equals("norte")) {
-            proximoAmbiente = ambienteAtual.getSaida("norte");
-        }
-        if(direcao.equals("leste")) {
-            proximoAmbiente = ambienteAtual.getSaida("leste");
-        }
-        if(direcao.equals("sul")) {
-            proximoAmbiente = ambienteAtual.getSaida("sul");
-        }
-        if(direcao.equals("oeste")) {
-            proximoAmbiente = ambienteAtual.getSaida("oeste");
-        }
+        proximoAmbiente = ambienteAtual.getSaida(direcao);
 
         if (proximoAmbiente == null) {
             System.out.println("Nao ha passagem!");
