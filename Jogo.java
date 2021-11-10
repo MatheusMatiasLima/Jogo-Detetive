@@ -19,6 +19,7 @@ public class Jogo
 {
     private Analisador analisador;
     private Ambiente ambienteAtual;
+    private PalavrasComando palavrasComando;
         
     /**
      * Cria o jogo e incializa seu mapa interno.
@@ -27,6 +28,7 @@ public class Jogo
     {
         criarAmbientes();
         analisador = new Analisador();
+        palavrasComando = new PalavrasComando();
     }
 
     /**
@@ -143,11 +145,7 @@ public class Jogo
      */
     private void imprimirAjuda() 
     {
-        System.out.println("Voce esta perdido. Voce esta sozinho. Voce caminha");
-        System.out.println("pela universidade.");
-        System.out.println();
-        System.out.println("Suas palavras de comando sao:");
-        System.out.println("   ir sair ajuda");
+        palavrasComando.mostrarComandosValidos();
     }
 
     /** 
