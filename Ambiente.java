@@ -20,6 +20,7 @@ public class Ambiente
 {
     private String descricao;
     private HashMap<String, Ambiente> saidas;
+    private Item item;
 
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
@@ -30,10 +31,11 @@ public class Ambiente
      * "um jardim aberto".
      * @param descricao A descricao do ambiente.
      */
-    public Ambiente(String descricao) 
+    public Ambiente(String descricao, String nomeItem) 
     {
         this.descricao = descricao;
         saidas = new HashMap<String, Ambiente>();
+        item = new Item(nomeItem);
     }
 
     /**

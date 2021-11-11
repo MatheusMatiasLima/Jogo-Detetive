@@ -12,6 +12,7 @@ public class Jogador {
 
     private Ambiente ambienteAtual;
     private Stack<Ambiente> ambienteAnterior;
+    private Item itemCarregado;
 
 
     public Jogador () {
@@ -40,5 +41,9 @@ public class Jogador {
     //retorna true se for o ambiente inicial
     public boolean ehAmbienteInicial() {
         return ambienteAnterior.empty();
+    }
+
+    public void carregarItem(Item item) {
+        itemCarregado = item;
     }
 }
