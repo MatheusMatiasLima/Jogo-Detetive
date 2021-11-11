@@ -43,7 +43,11 @@ public class Jogador {
         return ambienteAnterior.empty();
     }
 
-    public void carregarItem(Item item) {
+    public void pegarItem(Item item) {
         itemCarregado = item;
+    }
+
+    public void mostrarItemQueEstaCarregando() {
+        System.out.println("Voce esta carregando um(a) " + itemCarregado.getNome());
     }
 }

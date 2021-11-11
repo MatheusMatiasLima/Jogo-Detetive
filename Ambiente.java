@@ -95,4 +95,8 @@ public class Ambiente
         return item.getNome();
     }
 
+    public Item getItem () {
+        return item;
+    }
+
 }

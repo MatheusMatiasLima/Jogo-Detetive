@@ -227,6 +227,12 @@ public class Jogo
     }
 
     private void pegarItem() {
-        jogador 
+        if (jogador.getAmbienteAtual().getItem().getNome() == null) {
+            System.out.println("Esse lugar nao tem nenhum item.");
+        }
+        else {
+            jogador.pegarItem(jogador.getAmbienteAtual().getItem());
+            jogador.mostrarItemQueEstaCarregando();
+        }
     }
 }
