@@ -15,10 +15,13 @@
  * @version 2011.07.31 (2016.02.01)
  */
 
+import java.util.*;
+
 public class Jogo 
 {
     private Analisador analisador;
     private Ambiente ambienteAtual;
+    private Stack<Ambiente> ambienteAnterior;
         
     /**
      * Cria o jogo e incializa seu mapa interno.
@@ -27,6 +30,7 @@ public class Jogo
     {
         criarAmbientes();
         analisador = new Analisador();
+        ambienteAnterior = new Stack<Ambiente>();
     }
 
     /**
@@ -127,6 +131,10 @@ public class Jogo
         else if (palavraDeComando.equals("examinar")) {
             Examinar();
         }
+        else if (palavraDeComando.equals("voltar")) {
+            voltar();
+
+        }
         else if (palavraDeComando.equals("sair")) {
             querSair = sair(comando);
         }
@@ -162,6 +170,9 @@ public class Jogo
             return;
         }
 
+        //salva o ambiente caso o usuario quiser usar o voltar
+        ambienteAnterior.push(ambienteAtual);
+
         String direcao = comando.getSegundaPalavra();
 
         // Tenta sair do ambiente atual
@@ -178,11 +189,24 @@ public class Jogo
         }
     }
 
+    //caso o usuario quiser voltar ao ambiente anterior
+    private void voltar() {
+        if (ambienteAnterior.empty()) {
+            System.out.println("Voce comecou aqui!");
+        }
+        else {
+            ambienteAtual = ambienteAnterior.pop();
+            System.out.println(ambienteAtual.getDescricaoLonga());
+        }
+    }
+    
+
     /** 
      * "Sair" foi digitado. Verifica o resto do comando pra ver
      * se nos queremos realmente sair do jogo.
      * @return true, se este comando sai do jogo, false, caso contrario
      */
+
     private boolean sair(Comando comando) 
     {
         if(comando.temSegundaPalavra()) {
