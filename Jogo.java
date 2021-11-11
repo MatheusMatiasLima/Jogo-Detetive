@@ -41,11 +41,11 @@ public class Jogo
         Ambiente fora, anfiteatro, cantina, laboratorio, escritorio;
       
         // cria os ambientes
-        fora = new Ambiente("do lado de fora da entrada principal de uma universidade");
-        anfiteatro = new Ambiente("no anfiteatro");
-        cantina = new Ambiente("na cantina do campus");
-        laboratorio = new Ambiente("no laboratorio de computacao");
-        escritorio = new Ambiente("na sala de administracao dos computadores");
+        fora = new Ambiente("do lado de fora da entrada principal de uma universidade", "Faca");
+        anfiteatro = new Ambiente("no anfiteatro", null);
+        cantina = new Ambiente("na cantina do campus", null);
+        laboratorio = new Ambiente("no laboratorio de computacao", null);
+        escritorio = new Ambiente("na sala de administracao dos computadores", null);
         
         // inicializa as saidas dos ambientes
         //fora.ajustarSaida(null, anfiteatro, laboratorio, cantina);

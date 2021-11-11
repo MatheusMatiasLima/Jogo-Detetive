@@ -20,7 +20,7 @@ public class Ambiente
 {
     private String descricao;
     private HashMap<String, Ambiente> saidas;
-    private Item item;
+    private Item item; //faca
 
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
@@ -81,7 +81,18 @@ public class Ambiente
     }
 
     public String getDescricaoLonga(){
-        return "Voce esta " + descricao + ".\n" +getSaidaString();
+        if (item.getNome() == null) {
+            return "Voce esta " + descricao + ".\n" +getSaidaString() + "\nEste Lugar nao pussui nenhum objeto";
+        }
+        else {
+            return "Voce esta " + descricao + ".\n" +getSaidaString() + "\nEste lugar tem o objeto " + item.getNome();
+        }
+
+        
+    }
+
+    public String getNomeItem () {
+        return item.getNome();
     }
 
 }
