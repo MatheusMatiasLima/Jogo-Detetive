@@ -15,22 +15,22 @@
  * @version 2011.07.31 (2016.02.01)
  */
 
-import java.util.*;
 
 public class Jogo 
 {
+    private Jogador jogador;
     private Analisador analisador;
-    private Ambiente ambienteAtual;
-    private Stack<Ambiente> ambienteAnterior;
+
         
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
     public Jogo() 
     {
+        jogador = new Jogador();
         criarAmbientes();
         analisador = new Analisador();
-        ambienteAnterior = new Stack<Ambiente>();
+        
     }
 
     /**
@@ -68,11 +68,11 @@ public class Jogo
         //escritorio.ajustarSaidas(null, null, null, laboratorio);
         escritorio.ajustarSaida("oeste", laboratorio);
 
-        ambienteAtual = fora;  // o jogo comeca do lado de fora
+        jogador.definirAmbienteAtual(fora);  // o jogo comeca do lado de fora
     }
 
     private void imprimirInfoLocalAtual(){
-        System.out.println(ambienteAtual.getDescricaoLonga());
+        System.out.println(jogador.getAmbienteAtual().getDescricaoLonga());
     }
 
     /**
@@ -171,19 +171,19 @@ public class Jogo
         }
 
         //salva o ambiente caso o usuario quiser usar o voltar
-        ambienteAnterior.push(ambienteAtual);
+        jogador.salvarAmbienteAnterior();
 
         String direcao = comando.getSegundaPalavra();
 
         // Tenta sair do ambiente atual
         Ambiente proximoAmbiente = null;
-        proximoAmbiente = ambienteAtual.getSaida(direcao);
+        proximoAmbiente = jogador.getAmbienteAtual().getSaida(direcao);
 
         if (proximoAmbiente == null) {
             System.out.println("Nao ha passagem!");
         }
         else {
-            ambienteAtual = proximoAmbiente;
+            jogador.definirAmbienteAtual(proximoAmbiente);
             
             imprimirInfoLocalAtual();
         }
@@ -191,12 +191,13 @@ public class Jogo
 
     //caso o usuario quiser voltar ao ambiente anterior
     private void voltar() {
-        if (ambienteAnterior.empty()) {
+        if (jogador.ehAmbienteInicial()) {
             System.out.println("Voce comecou aqui!");
         }
         else {
-            ambienteAtual = ambienteAnterior.pop();
-            System.out.println(ambienteAtual.getDescricaoLonga());
+            jogador.definirAmbienteAtual(jogador.retornarAmbienteAnterior());
+            //ambienteAtual = ambienteAnterior.pop();
+            System.out.println(jogador.getAmbienteAtual().getDescricaoLonga());
         }
     }
     
@@ -219,6 +220,6 @@ public class Jogo
     }
 
     private void Examinar(){
-        System.out.println(ambienteAtual.getDescricaoLonga());
+        System.out.println(jogador.getAmbienteAtual().getDescricaoLonga());
     }
 }
