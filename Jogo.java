@@ -15,11 +15,13 @@
  * @version 2011.07.31 (2016.02.01)
  */
 
+import java.util.ArrayList;
 
 public class Jogo 
 {
     private Jogador jogador;
     private Analisador analisador;
+    NPC Matheus, Joicy, Luiz, Mariana; //MEHOREM ISSO
 
         
     /**
@@ -29,8 +31,17 @@ public class Jogo
     {
         jogador = new Jogador();
         criarAmbientes();
+        criarNPCs();
         analisador = new Analisador();
         
+    }
+
+    private void criarNPCs() { //MELHOREM ISSO
+        
+        Matheus = new NPC("Matheus", "Eu sou o assassino");
+        Joicy = new NPC("Joicy", "Nao sou a assassina");
+        Luiz = new NPC("Luiz", "Nao sou o assassino");
+        Mariana = new NPC("Mariana", "Nao sou a assassina");
     }
 
     /**
@@ -122,6 +133,7 @@ public class Jogo
         }
 
         String palavraDeComando = comando.getPalavraDeComando();
+
         if (palavraDeComando.equals("ajuda")) {
             imprimirAjuda();
         }
@@ -138,11 +150,67 @@ public class Jogo
         else if (palavraDeComando.equals("pegarItem")) {
             pegarItem();
         }
+        else if (palavraDeComando.equals("NPC")) {
+            Comando comandoNPC = analisador.acaoNPC();
+            processarNPC(comandoNPC);
+
+        }
+        else if (palavraDeComando.equals("verStatus")) {
+            verStatus();
+
+        }
+
+        else if (palavraDeComando.equals("denunciar")) {
+            denunciarAssassinato ();
+        }
+
         else if (palavraDeComando.equals("sair")) {
             querSair = sair(comando);
         }
 
         return querSair;
+    }
+
+
+
+
+    private void processarNPC (Comando comando) {
+        if (comando == null) {
+            System.out.println("nao entendi o que voce disse.");
+            return;
+        }
+        else {
+            if (comando.getPalavraDeComando().equals("acusar")) {
+                jogador.definirAssassino(comando.getSegundaPalavra());
+
+            }
+            else if (comando.getPalavraDeComando().equals("perguntar")) {
+
+                /*
+                
+                
+                    ATENCAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+
+                    TEM QUE MELHORAR ISSO
+                    
+
+
+                */
+                
+                if (comando.getSegundaPalavra().equals(Matheus.getNome())) {
+                    System.out.println(Matheus.getHitoria());
+                }
+                else if(comando.getSegundaPalavra().equals(Joicy.getNome())) {
+                    System.out.println(Joicy.getHitoria()) ;
+                }
+                //... tem que terminar 
+
+            }
+            else {
+                System.out.println("Nao entendi");
+            }
+        }
+
     }
 
     // Implementacoes dos comandos do usuario
@@ -235,4 +303,20 @@ public class Jogo
             jogador.mostrarItemQueEstaCarregando();
         }
     }
+
+    private void verStatus() {
+        jogador.mostrarItemQueEstaCarregando();
+        jogador.mostrarAcusacao();
+    }
+
+    private void denunciarAssassinato () {
+        if (jogador.getNomeAssassino().equals("Matheus") && jogador.getItemCarregado().equals("Faca")) {
+            System.out.println("Parabens, voce achou o assassino!");
+        }
+        else{
+            System.out.println("Voce perdeu :(");
+        }
+        processarComando(new Comando("sair",null));
+    }
+
 }

@@ -21,6 +21,7 @@ public class Analisador
 {
     private PalavrasComando palavrasDeComando;  // guarda todas as palavras de comando validas
     private Scanner entrada;         // origem da entrada de comandos
+    private RegistroNPC registroNPC;
 
     /**
      * Cria um analisador para ler do terminal.
@@ -28,10 +29,11 @@ public class Analisador
     public Analisador() 
     {
         palavrasDeComando = new PalavrasComando();
+        registroNPC = new RegistroNPC();
         entrada = new Scanner(System.in);
     }
 
-    /**
+    /*
      * @return O proximo comando do usuario
      */
     public Comando pegarComando() 
@@ -64,7 +66,45 @@ public class Analisador
         }
     }
 
+
     public void mostrarComandosValidos() {
         palavrasDeComando.mostrarComandosValidos();
     }
+
+    public Comando acaoNPC() 
+    {
+        String linha;   // guardara uma linha inteira
+        String acao = null;
+        String nome = null;
+
+        System.out.print("Voce quer acusar ou perguntar? E qual pessoa seria?\nNomes: ");
+        registroNPC.mostrarNomesValidos();
+        System.out.print("\n> ");     // imprime o prompt
+
+        linha = entrada.nextLine();
+
+        // Tenta encontrar ate duas palavras na linha
+        Scanner tokenizer = new Scanner(linha);
+        if(tokenizer.hasNext()) {
+            acao = tokenizer.next();      // pega a primeira palavra
+            if(tokenizer.hasNext()) {
+                nome = tokenizer.next();      // pega a segunda palavra
+                // obs: nos simplesmente ignoramos o resto da linha.
+            }
+        }
+
+        // Agora verifica se esta palavra eh conhecida. Se for, cria um
+        // com ela. Se nao, cria um comando "null" (para comando desconhecido)
+        if(registroNPC.ehComandoNPC(acao) && registroNPC.ehNome(nome)) {
+            return new Comando(acao, nome);
+        }
+        else{
+            return null;
+        }
+    }
+
+    public void mostrarNomesValidos() {
+        registroNPC.mostrarNomesValidos();
+    }
+
 }

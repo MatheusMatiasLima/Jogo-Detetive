@@ -13,11 +13,21 @@ public class Jogador {
     private Ambiente ambienteAtual;
     private Stack<Ambiente> ambienteAnterior;
     private Item itemCarregado;
+    private String nomeAssassino;
 
 
     public Jogador () {
         ambienteAnterior = new Stack<Ambiente>();
+        nomeAssassino = null;
 
+    }
+
+    public String getNomeAssassino() {
+        return nomeAssassino;
+    }
+
+    public String getItemCarregado() {
+        return itemCarregado.getNome();
     }
 
     public void definirAmbienteAtual(Ambiente ambiente) {
@@ -48,6 +58,27 @@ public class Jogador {
     }
 
     public void mostrarItemQueEstaCarregando() {
-        System.out.println("Voce esta carregando um(a) " + itemCarregado.getNome());
+        if (itemCarregado == null) {
+            System.out.println("Voce nao esta carregando nenhum item.");
+        }
+        else {
+            System.out.println("Voce esta carregando um(a) " + itemCarregado.getNome());
+        }
     }
+
+    public void mostrarAcusacao() {
+        if (nomeAssassino == null) {
+            System.out.println("Voce nao esta acusando ninguem.");
+        }
+        else {
+            System.out.println("Voce esta acusando " + nomeAssassino);
+        }
+    }
+
+    public void definirAssassino(String nome) {
+        nomeAssassino = nome;
+        mostrarAcusacao();
+    }
+
+
 }
