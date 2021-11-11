@@ -129,11 +129,14 @@ public class Jogo
             irParaAmbiente(comando);
         }
         else if (palavraDeComando.equals("examinar")) {
-            Examinar();
+            examinar();
         }
         else if (palavraDeComando.equals("voltar")) {
             voltar();
 
+        }
+        else if (palavraDeComando.equals("pegarItem")) {
+            pegarItem();
         }
         else if (palavraDeComando.equals("sair")) {
             querSair = sair(comando);
@@ -219,7 +222,11 @@ public class Jogo
         }
     }
 
-    private void Examinar(){
+    private void examinar(){
         System.out.println(jogador.getAmbienteAtual().getDescricaoLonga());
+    }
+
+    private void pegarItem() {
+        jogador 
     }
 }
