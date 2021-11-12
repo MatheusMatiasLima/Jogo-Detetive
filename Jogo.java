@@ -318,7 +318,7 @@ public class Jogo
             else{
                 System.out.println("Voce perdeu :(");
             }
-            processarComando(new Comando("sair",null));
+            System.exit(0);
         }
         catch (Exception e) {
             System.out.println("Tem certeza que tem a arma e o nome da pessoa?");
