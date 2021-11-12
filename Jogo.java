@@ -21,7 +21,9 @@ public class Jogo
 {
     private Jogador jogador;
     private Analisador analisador;
-    private NPC Matheus, Joicy, Luiz, Mariana; //MEHOREM ISSO
+    //private NPC Matheus, Joicy, Luiz, Mariana; //MEHOREM ISSO
+    private ArrayList<NPC> npcs;
+    private Ambiente fora, anfiteatro, cantina, laboratorio, escritorio;
 
         
     /**
@@ -30,18 +32,20 @@ public class Jogo
     public Jogo() 
     {
         jogador = new Jogador();
+        analisador = new Analisador();
+        npcs = new ArrayList<>();
+        
         criarAmbientes();
         criarNPCs();
-        analisador = new Analisador();
-        
     }
 
     private void criarNPCs() { //MELHOREM ISSO
         
-        Matheus = new NPC("Matheus", "Eu sou o assassino");
-        Joicy = new NPC("Joicy", "Nao sou a assassina");
-        Luiz = new NPC("Luiz", "Nao sou o assassino");
-        Mariana = new NPC("Mariana", "Nao sou a assassina");
+        npcs.add(new NPC("Matheus", "Eu estava sozinho na Cantina"));
+        npcs.add(new NPC("Joicy", "Eu estava com a Mariana na Cantina"));
+        npcs.add(new NPC("Luiz", "Eu estava sozinho no laboratorio, mas vi a Mariana e a Joyce subir para a Cantina"));
+        npcs.add(new NPC("Mariana", "Eu estava com a Joicy na Cantina, mas vi o Matheus ir para o lado de fora com uma faca"));
+
     }
 
     /**
@@ -49,8 +53,7 @@ public class Jogo
      */
     private void criarAmbientes()
     {
-        Ambiente fora, anfiteatro, cantina, laboratorio, escritorio;
-      
+
         // cria os ambientes
         fora = new Ambiente("do lado de fora da entrada principal de uma universidade", "Faca");
         anfiteatro = new Ambiente("no anfiteatro", null);
@@ -197,13 +200,19 @@ public class Jogo
 
                 */
                 
-                if (comando.getSegundaPalavra().equals(Matheus.getNome())) {
-                    System.out.println(Matheus.getHitoria());
+                // if (comando.getSegundaPalavra().equals(Matheus.getNome())) {
+                //     System.out.println(Matheus.getHitoria());
+                // }
+                // else if(comando.getSegundaPalavra().equals(Joicy.getNome())) {
+                //     System.out.println(Joicy.getHitoria()) ;
+                // }
+                // //... tem que terminar 
+
+                for(NPC npc: npcs){
+                    if (comando.getSegundaPalavra().equals(npc.getNome())) {
+                        System.out.println(npc.getHitoria());
+                    }
                 }
-                else if(comando.getSegundaPalavra().equals(Joicy.getNome())) {
-                    System.out.println(Joicy.getHitoria()) ;
-                }
-                //... tem que terminar 
 
             }
             else {
