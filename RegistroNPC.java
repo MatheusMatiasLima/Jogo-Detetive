@@ -39,7 +39,7 @@ public class RegistroNPC {
 
     public boolean ehComandoNPC(String umaString)
     {
-        for(int i = 0; i < nomesValidos.length; i++) {
+        for(int i = 0; i < comandoNPC.length; i++) {
             if(comandoNPC[i].equals(umaString))
                 return true;
         }

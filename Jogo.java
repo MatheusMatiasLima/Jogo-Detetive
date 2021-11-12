@@ -110,8 +110,8 @@ public class Jogo
     private void imprimirBoasVindas()
     {
         System.out.println();
-        System.out.println("Bem-vindo ao World of Zuul!");
-        System.out.println("World of Zuul eh um novo jogo de aventura, incrivelmente chato.");
+        System.out.println("Bem-vindo ao Detetive!");
+        System.out.println("Detetive eh um novo jogo de aventura, no qual voce precisa char o assassino e a arma.");
         System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
         
@@ -176,7 +176,7 @@ public class Jogo
 
     private void processarNPC (Comando comando) {
         if (comando == null) {
-            System.out.println("nao entendi o que voce disse.");
+            System.out.println("Eu nao entendi o que voce disse...");
             return;
         }
         else {
@@ -310,13 +310,20 @@ public class Jogo
     }
 
     private void denunciarAssassinato () {
-        if (jogador.getNomeAssassino().equals("Matheus") && jogador.getItemCarregado().equals("Faca")) {
-            System.out.println("Parabens, voce achou o assassino!");
+
+        try {
+            if (jogador.getNomeAssassino().equals("Matheus") && jogador.getItemCarregado().equals("Faca")) {
+                System.out.println("Parabens, voce achou o assassino!");
+            }
+            else{
+                System.out.println("Voce perdeu :(");
+            }
+            processarComando(new Comando("sair",null));
         }
-        else{
-            System.out.println("Voce perdeu :(");
+        catch (Exception e) {
+            System.out.println("Tem certeza que tem a arma e o nome da pessoa?");
+
         }
-        processarComando(new Comando("sair",null));
     }
 
 }
