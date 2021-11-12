@@ -21,7 +21,7 @@ public class Jogo
 {
     private Jogador jogador;
     private Analisador analisador;
-    NPC Matheus, Joicy, Luiz, Mariana; //MEHOREM ISSO
+    private NPC Matheus, Joicy, Luiz, Mariana; //MEHOREM ISSO
 
         
     /**
