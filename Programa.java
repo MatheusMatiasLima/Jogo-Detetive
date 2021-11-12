@@ -7,6 +7,3 @@ public class Programa {
 	}
 
 }
-
-//Close 1
-//Close 3
